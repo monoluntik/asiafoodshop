@@ -1,4 +1,4 @@
-Django
-psycopg2-binary
-pillow
-decouple
+Django==3.1
+psycopg2-binary==2.8.5
+pillow==7.1
+python-decouple

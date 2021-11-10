@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import redirect
 
 
 from .models import *
-from .forms import CreateProductForm
+from .forms import CreateProductForm, UpdateProductForm
 
 class CategoryListView(ListView):
     model = Category
@@ -36,3 +36,18 @@ class ProductCreateView(CreateView):
     template_name = 'create.html'
     form_class = CreateProductForm
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_form'] = self.get_form(self.get_form_class())
+        return context
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    template_name = 'create.html'
+    form_class = UpdateProductForm
+    pk_url_kwarg = 'product_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_form'] = self.get_form(self.get_form_class())
+        return context

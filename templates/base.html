@@ -36,13 +36,20 @@
 					</header>
 								<!-- Menu -->
 					<nav id="menu">
-						<h2>Menu</h2>
+						{%if request.user.is_authenticated%}
+						<h2>{{ request.user.username }}</h2>
+						{%else%}
+						<h2>Idiot</h2>
+						{%endif%}
 						<ul>
 							<li><a href="{%url 'home'%}">Home</a></li>
 							<li><a href="{%url 'create'%}">Create new product</a></li>
-							<li><a href="generic.html">Tempus etiam</a></li>
-							<li><a href="generic.html">Consequat dolor</a></li>
-							<li><a href="elements.html">Elements</a></li>
+							{%if not request.user.is_authenticated %}
+							<li><a href="{% url 'register'%}">Sign Up</a></li>
+							<li><a href="{% url 'login'%}">Login</a></li>
+							{%else%}
+							<li><a href="{%url 'logout'%}">Logout</a></li>
+							{%endif%}
 						</ul>
 					</nav>
 

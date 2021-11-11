@@ -11,9 +11,11 @@
 							{%for category in categories%}
 							{%if not category.parent%}
 								<article class="style6">
+									{% if category.image %}
 									<span class="image">
 										<img style="width: 300px; height: 290px" src="{{category.image.url}}" alt="" />
 									</span>
+									{% endif %}
 									<a href="{%url 'list' category.slug %}">
 										<h2>{{category.title}}</h2>
 										<div class="content">

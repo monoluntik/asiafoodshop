@@ -9,8 +9,9 @@
 							<p>Dtristique.</p>
 						</div>
 					</div>
-					<section class="tiles">	
-					{% for product in product.category.all %}
+					<section class="tiles">
+					{% for category in category.children.all %}
+					{% for product in products %}
 					<div class="card" style="width: 18rem;">
 						<img src="{{product.get_image.url}}" class="card-img-top" alt="...">
 						<div class="card-body">
@@ -19,6 +20,7 @@
 							<a href="{%url 'product-detail' product.id%}" class="btn btn-primary">More</a>
 						</div>
 					</div>
+						{% endfor %}
 					{% endfor %}
 					</section>
 {% endblock %}

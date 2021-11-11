@@ -21,10 +21,7 @@
 								<p class="logo">
 									<span class="symbol"><img style="width: 60px; height: auto" src="{% static 'images/logo.svg' %}" alt="" /></span><span class="title">UMAMI</span>
 								</p>
-								<form method="get" action="{%url 'search'%}" class="d-flex">
-									<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-									<button class="btn btn-outline-success" type="submit">Search</button>
-								  </form>
+
 															<!-- Nav -->
 								<nav>
 									<ul>
@@ -37,6 +34,9 @@
 								<!-- Menu -->
 					<nav id="menu">
 						<h2>Menu</h2>
+						<form method="get" action="{%url 'search'%}">
+									<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+								  </form>
 						<ul>
 							<li><a href="{%url 'home'%}">Home</a></li>
 							<li><a href="{%url 'create'%}">Create new product</a></li>

@@ -38,17 +38,19 @@
 						{%else%}
 						<h2>Idiot</h2>
 						{%endif%}
-            						<form method="get" action="{%url 'search'%}">
+            						<form method="get" action="{% url 'search' %}"class="d-flex">
 									<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 								  </form>
 						<ul>
-							<li><a href="{%url 'home'%}">Home</a></li>
-							<li><a href="{%url 'create'%}">Create new product</a></li>
+							<li><a href="{% url 'home' %}">Home</a></li>
+							{% if request.user.is_authenticated %}
+							<li><a href="{% url 'create' %}">Create new product</a></li>
+							{% endif %}
 							{%if not request.user.is_authenticated %}
-							<li><a href="{% url 'register'%}">Sign Up</a></li>
-							<li><a href="{% url 'login'%}">Login</a></li>
+							<li><a href="{% url 'register' %}">Sign Up</a></li>
+							<li><a href="{% url 'login' %}">Login</a></li>
 							{%else%}
-							<li><a href="{%url 'logout'%}">Logout</a></li>
+							<li><a href="{% url 'logout' %}">Logout</a></li>
 							{%endif%}
 						</ul>
 					</nav>

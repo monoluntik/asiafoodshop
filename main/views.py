@@ -45,7 +45,7 @@ class ProductCreateView(IsAdminCheckMixin, CreateView):
     model = Product
     template_name = 'create.html'
     form_class = CreateProductForm
-    success_url = reverse_lazy('home')
+    # success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -55,7 +55,7 @@ class ProductCreateView(IsAdminCheckMixin, CreateView):
 
 class ProductUpdateView(IsAdminCheckMixin, UpdateView):
     model = Product
-    template_name = 'create.html'
+    template_name = 'update.html'
     form_class = UpdateProductForm
     pk_url_kwarg = 'product_id'
     success_url = reverse_lazy('home')

@@ -1,4 +1,6 @@
-<!-- создание продукта -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <a>Hello world</a>
 <h1>Create product</h1>
 <form method="post" enctype="multipart/form-data">
@@ -6,3 +8,4 @@
     {%csrf_token%}  
     <button type="submit" class="btn btn-success">Create</button>
 </form>
+{% endblock %}

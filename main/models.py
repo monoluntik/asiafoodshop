@@ -26,3 +26,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def get_image(self):
+        if self.image:
+            return self.image.url
+        return ""

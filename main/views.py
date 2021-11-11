@@ -15,16 +15,15 @@ class CategoryListView(ListView):
 
 
 
-
 class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
     context_object_name = 'products'
 
-    def get_queryset(self):
+    def get_queryset(self): 
         queryset = super().get_queryset()
         queryset = queryset.filter(category__slug=self.kwargs.get('slug'))
-        print(queryset)
+        print(queryset) 
         return queryset
 
 

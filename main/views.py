@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
@@ -14,29 +15,33 @@ class CategoryListView(ListView):
     context_object_name = 'categories'
 
 
-
 class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
     context_object_name = 'products'
 
-    def get_queryset(self): 
+    def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.filter(category__slug=self.kwargs.get('slug'))
-        print(queryset) 
+        # print(self.kwargs)
+        slug = self.kwargs.get('slug')
+        queryset = queryset.filter(category__slug=slug)
         return queryset
 
 
-class DetailListView(DetailView):
+class ProductDetailListView(DetailView):
     model = Product
     template_name = 'generic.html'
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
 
 
+class IsAdminCheckMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated and self.request.user.is_superuser
 
 
-class ProductCreateView(CreateView):
+
+class ProductCreateView(IsAdminCheckMixin, CreateView):
     model = Product
     template_name = 'create.html'
     form_class = CreateProductForm
@@ -48,7 +53,7 @@ class ProductCreateView(CreateView):
         return context
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(IsAdminCheckMixin, UpdateView):
     model = Product
     template_name = 'create.html'
     form_class = UpdateProductForm
@@ -61,11 +66,12 @@ class ProductUpdateView(UpdateView):
         return context
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(IsAdminCheckMixin, DeleteView):
     model = Product
     template_name = 'delete_product.html'
     pk_url_kwarg = 'product_id'
     success_url = 'home'
+
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
@@ -83,5 +89,5 @@ class SearchListView(ListView):
         if not q:
             queryset = Product.objects.none()
         else:
-            queryset = queryset.filter(Q(name__icontains=q)|Q(description__icontains=q))
+            queryset = queryset.filter(Q(name__icontains=q) | Q(description__icontains=q))
         return queryset

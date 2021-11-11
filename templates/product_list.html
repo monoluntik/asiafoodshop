@@ -1,26 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
-							<h1>Generic Page</h1>
-							<span class="image main"><img src="{% static 'images/chinese longlogo.jpg' %}" alt="" /></span>
-							<p>Dtristique.</p>
-						</div>
-					</div>
-					<section class="tiles">
-					{% for category in category.children.all %}
-					{% for product in products %}
-					<div class="card" style="width: 18rem;">
-						<img src="{{product.get_image.url}}" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">{{ product.name }}</h5>
-							<p class="card-text">{{ product.description|truncatechars:87 }}</p>
-							<a href="{%url 'product-detail' product.id%}" class="btn btn-primary">More</a>
-						</div>
-					</div>
-						{% endfor %}
-					{% endfor %}
-					</section>
+  {% for product in products %}
+         <div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="picture">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a></h5>
+        <p class="card-text">{{ product.description|truncatechars:50 }}</p>
+          {% if product.available %}
+        <p style="color: green;" class="card-text">{{ product.available }}</p>
+        {% endif %}
+        <p class="card-text">{{ product.price }} Сом </p>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
 {% endblock %}

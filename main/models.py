@@ -13,6 +13,12 @@ class Category(models.Model):
             return f'{self.parent} --> {self.title}'
         return self.title
 
+    @property
+    def get_children(self):
+        if self.children:
+            return self.children.all()
+        return False
+
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')

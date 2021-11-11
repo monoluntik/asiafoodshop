@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.db.models import Q
 
 from .models import *
 from .forms import CreateProductForm, UpdateProductForm
@@ -69,3 +70,18 @@ class ProductDeleteView(DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return redirect('home')
+
+
+class SearchListView(ListView):
+    model = Product
+    template_name = 'search.html'
+    context_object_name = 'results'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        q = self.request.GET.get('q')
+        if not q:
+            queryset = Product.objects.none()
+        else:
+            queryset = queryset.filter(Q(name__icontains=q)|Q(description__icontains=q))
+        return queryset

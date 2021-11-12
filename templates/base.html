@@ -17,9 +17,11 @@
 						<div class="inner">
 
 							<!-- Logo -->
+							<a href="{% url 'home'%}">
 								<p class="logo">
 									<span class="symbol"><img style="width: 60px; height: auto" src="{% static 'images/logo.svg' %}" alt="" /></span><span class="title">UMAMI</span>
 								</p>
+							</a>
 
 															<!-- Nav -->
 								<nav>
@@ -42,7 +44,7 @@
 									<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 								  </form>
 						<ul>
-							<li><a href="{% url 'home' %}">Home</a></li>
+							<li><a href="{% url 'about' %}">About Us</a></li>
 							{% if request.user.is_authenticated %}
 							<li><a href="{% url 'create' %}">Create new product</a></li>
 							{% endif %}

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
 
  
-
+    'cart',
 
     #myapps
     'main',
@@ -75,10 +75,13 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'main.context_processor.get_categories',
+                'cart.context_processor.cart_total_amount',
             ],
         },
     },
 ]
+
+CART_SESSION_ID = 'cart'
 
 WSGI_APPLICATION = 'asiafoodshop.wsgi.application'
 

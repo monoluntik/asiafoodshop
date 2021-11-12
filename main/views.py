@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.db.models import Q
@@ -91,5 +91,5 @@ class SearchListView(ListView):
             queryset = queryset.filter(Q(name__icontains=q) | Q(description__icontains=q))
         return queryset
 
-def about(request):
-    return render(request, 'about.html')
+class About(TemplateView):
+    template_name = 'about.html'

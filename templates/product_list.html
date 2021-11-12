@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  {% for product in products %}
+  {% for product in page_obj %}
          <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
@@ -17,4 +17,19 @@
   </div>
 </div>
     {% endfor %}
+<div class="clearfix">
+ {% if page_obj.has_other_pages %}
+   <nav aria-label="Page navigation container">
+   <ul class="pagination justify-content-center">
+  {% if page_obj.has_previous %}
+  <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">« PREV </a></li>
+  {% endif %}
+  {% if page_obj.has_next %}
+  <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT »</a></li>
+    {% endif %}
+   </ul>
+   </nav>
+  {% endif %}
+</div>
+</div>
 {% endblock %}

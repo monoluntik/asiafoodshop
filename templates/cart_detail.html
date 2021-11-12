@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{%load static%}
+{% load cart_tag %}
+<h1>My cart</h1>
+{%block trash%}
+<a href="{%url 'cart_clear' %}"><img style="width: 30px; height: auto;" src="{%static 'img/trash-solid.svg'%}"></a>
+{%endblock trash%}
+{%block content%} 
+<section class="tiles" style="margin-left:100px;margin-right:100px;">
+{% for key,value in request.session.cart.items %}
+<div class="card" style="width: 18rem;">
+    <img src="{{value.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><a href="{% url 'detail' key %}">{{ value.name }}</a></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{value.price}}</li>
+      <li class="list-group-item">{{value.quantity}}</li>
+      <li class="list-group-item">Total: {{value.price|multiply:value.quantity}}</li>
+    </ul>
+    <div class="card-body">
+        <a role="button" href="{% url 'item_increment' value.product_id %}" class="btn btn=success">Increase</a>
+        {%if not value.quantity == 1%}
+        <a role="button" href="{% url 'item_decrement' value.product_id %}" class="btn btn=danger">Decrease</a>
+        {%endif%}
+    </div>
+    <div class="cart-body">
+      <a role="button" href="{%url 'item_clear' value.product_id%}" class="btn btn-secondary">Remove</a></div>
+      
+</div>
+{% endfor %}
+</section>
+{%endblock%}

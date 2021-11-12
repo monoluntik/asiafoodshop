@@ -1,0 +1,7 @@
+{% block title %}Orders{% endblock title %}
+{% block content %}
+<h1>Pay</h1>
+<p></p>
+<script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ stripe_key }}" data-description="Give me your money"  data-amount="3900"  data-locale="auto">
+</script>
+{% endblock content %}

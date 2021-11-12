@@ -50,7 +50,7 @@ class ProductCreateView(IsAdminCheckMixin, CreateView):
     model = Product
     template_name = 'create.html'
     form_class = CreateProductForm
-    # success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -99,6 +99,7 @@ class SearchListView(ListView):
 
 class About(TemplateView):
     template_name = 'about.html'
+
 
 
 

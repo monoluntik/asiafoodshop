@@ -16,7 +16,7 @@
         <h5 class="card-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a></h5>
         <p class="card-text">{{ product.description|truncatechars:50 }}</p>
         <p class="card-text">{{ product.price }} Сом </p>
-        {%if request.user.is_authenticated %}
+        {%if request.user.is_authenticated and not request.user.is_superuser%}
         <a href="{% url 'cart_add' product.id %}">Add To Cart</a>
         {%endif%}
       </div>

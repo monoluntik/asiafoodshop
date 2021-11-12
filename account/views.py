@@ -4,9 +4,11 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 
+from account.models import Order
 
 
-from .forms import RegistrationForm
+
+from .forms import RegistrationForm, OrderForm
 
 class RegisterView(CreateView):
     model = User
@@ -16,3 +18,10 @@ class RegisterView(CreateView):
 
 class OrdersPageView(TemplateView):
     template_name = 'pay.html'
+
+
+class OrderInfo(CreateView):
+    model = Order
+    form_class = OrderForm
+    template_name = 'pay.html'
+    success_url = reverse_lazy('home')

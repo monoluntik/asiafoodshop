@@ -2,9 +2,7 @@
 {%load static%}
 {% load cart_tag %}
 <h1>My cart</h1>
-{%block trash%}
-<a href="{%url 'cart_clear' %}"><img style="width: 30px; height: auto;" src="{%static 'img/trash-solid.svg'%}"></a>
-{%endblock trash%}
+
 {%block content%} 
 <section class="tiles" style="margin-left:100px;margin-right:100px;">
 {% for key,value in request.session.cart.items %}
@@ -29,6 +27,10 @@
       
 </div>
 {% endfor %}
+
 </section>
 
 {%endblock%}
+{%block trash%}
+<h3><a href="{%url 'cart_clear' %}" style="margin-left:100px;margin-right:100px;" >Cart clear</a></h3>
+{%endblock trash%}

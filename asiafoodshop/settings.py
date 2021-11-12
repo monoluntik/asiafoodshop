@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
 
  
-
+    'cart',
 
     #myapps
     'main',
@@ -75,10 +75,13 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'main.context_processor.get_categories',
+                'cart.context_processor.cart_total_amount',
             ],
         },
     },
 ]
+
+CART_SESSION_ID = 'cart'
 
 WSGI_APPLICATION = 'asiafoodshop.wsgi.application'
 
@@ -163,3 +166,5 @@ EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
 
 STRIPE_TEST_PUBLISHABLE_KEY=config('STRIPE_TEST_PUBLISHABLE_KEY')
 STRIPE_TEST_SECRET_KEY=config('STRIPE_TEST_SECRET_KEY')
+
+

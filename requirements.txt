@@ -3,3 +3,4 @@ psycopg2-binary==2.8.5
 pillow==7.1
 python-decouple
 stripe
+django-shopping-cart

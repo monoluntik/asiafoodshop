@@ -45,7 +45,7 @@
 								  </form>
 						<ul>
 							<li><a href="{% url 'about' %}">About Us</a></li>
-							{% if request.user.is_authenticated %}
+							{% if request.user.is_superuser %}
 							<li><a href="{% url 'create' %}">Create new product</a></li>
 							{% endif %}
 							{%if not request.user.is_authenticated %}
@@ -53,6 +53,9 @@
 							<li><a href="{% url 'login' %}">Login</a></li>
 							{%else%}
 							<li><a href="{% url 'logout' %}">Logout</a></li>
+							{%endif%}
+							{%if not request.user.is_superuser and request.user.is_authenticated%}
+							<li><a href="{%url 'cart_detail'%}">Cart</a></li>
 							{%endif%}
 						</ul>
 					</nav>
@@ -71,7 +74,7 @@
 									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
 									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
 									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://github.com/monoluntik/asiafoodshop" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
 									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
 									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
 									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>

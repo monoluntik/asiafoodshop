@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
 {%block content%}
-<form method="post" enctype="multipart/form-data">
+<form style="margin-left:100px;margin-right:100px;" method="post" enctype="multipart/form-data">
     {%csrf_token%}
     {{form.as_p}}
     <button type="submit" class="btn btn=secondary">Login</button>

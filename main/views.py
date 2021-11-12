@@ -91,3 +91,6 @@ class SearchListView(ListView):
         else:
             queryset = queryset.filter(Q(name__icontains=q) | Q(description__icontains=q))
         return queryset
+
+def about(request):
+    return render(request, 'about.html')

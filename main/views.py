@@ -23,6 +23,7 @@ class ProductListView(ListView):
     model = Product
     template_name = 'product_list.html'
     context_object_name = 'products'
+    paginate_by = 2
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -37,6 +38,7 @@ class ProductDetailListView(DetailView):
     template_name = 'generic.html'
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
+
 
 
 class IsAdminCheckMixin(UserPassesTestMixin):

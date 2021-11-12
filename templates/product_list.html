@@ -11,9 +11,6 @@
       <div class="card-body">
         <h5 class="card-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a></h5>
         <p class="card-text">{{ product.description|truncatechars:50 }}</p>
-          {% if product.available %}
-        <p style="color: green;" class="card-text">{{ product.available }}</p>
-        {% endif %}
         <p class="card-text">{{ product.price }} Сом </p>
       </div>
     </div>

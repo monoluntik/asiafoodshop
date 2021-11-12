@@ -40,7 +40,6 @@ class IsAdminCheckMixin(UserPassesTestMixin):
         return self.request.user.is_authenticated and self.request.user.is_superuser
 
 
-
 class ProductCreateView(IsAdminCheckMixin, CreateView):
     model = Product
     template_name = 'create.html'

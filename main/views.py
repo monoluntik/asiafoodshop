@@ -1,16 +1,14 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.checks import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
-
-
-
 from .models import *
-from .forms import CreateProductForm, UpdateProductForm
+from .forms import *
 
 
 class CategoryListView(ListView):
@@ -148,4 +146,9 @@ def cart_clear(request):
 @login_required()
 def cart_detail(request):
     return render(request, 'cart_detail.html')
+
+class AddComment(CreateView):
+    model = Comment
+    form_class = CommentForm
+    success_url = reverse_lazy('home')
 

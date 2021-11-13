@@ -14,7 +14,27 @@
 							{%if request.user.is_authenticated and not request.user.is_superuser %}
 							<a href="{% url 'cart_add' product.id %}">Add To Cart</a>
 							{%endif%}
-						</div>
-					</div>
-					 
+
+							<hr>
+							<h1>Comments...</h1>
+
+							{% if not product.comments.all %}
+							No Comments Yet...
+							<br/><br/>
+							<a href="{% url 'comment' product.id %}">Add Comment</a>
+							{% else %}
+							{% for comment in product.comments.all %}
+							<strong>
+								{{ comment.name }} -
+								{{ comment.created }}
+							</strong>
+							<br/>
+							{{ comment.body }}
+							<br/><br/>
+
+							{% endfor %}
+							{% endif %}
+							<hr>
+                        </div>
+                    </div>
 {% endblock %}

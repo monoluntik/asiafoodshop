@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 
 from account.models import Order
+from cart.cart import Cart
 
 
 
@@ -27,3 +28,5 @@ class OrderInfo(CreateView):
     success_url = reverse_lazy('home')
     
   
+def cart(request):
+    return {'cart': Cart(request)}

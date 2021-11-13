@@ -56,14 +56,16 @@
 							{%endif%}
 							{%if not request.user.is_superuser and request.user.is_authenticated%}
 							<li><a href="{%url 'cart_detail'%}">Cart</a></li>
+							
 							{%endif%}
 						</ul>
 					</nav>
 
-				{% block content %}  {% endblock %}
+				{% block content %} {% endblock %}
 
 
-
+				{%block trash%} 
+				{%endblock trash%}
 <!-- Footer -->
 					<footer id="footer">
 						<div class="inner">
@@ -78,6 +80,7 @@
 									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
 									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
 									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+									
 								</ul>
 							</section>
 						</div>

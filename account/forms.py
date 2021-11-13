@@ -1,21 +1,42 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.mail import  send_mail
+from django.forms.fields import CharField
+
+from .models import Order
 
 
 
 def send_welcome_email(email):
-    message = f'Спасибо за регистрацию на нашем сайте Pyshop!'
+    message = f'Спасибо за регистрацию на нашем сайте UMAMI!'
     send_mail(
-        'Pyshop Welcome',
+        'Welcome to UMAMI',
         message,
         'pyshop@gmail.com',
         [email],
         fail_silently=False
     )
 
+def send_order_email(email, massage):
+    send_mail(
+        'Thank you for your order',
+        massage,
+        'pyshop@gmail.com',
+        [email],
+        fail_silently=False
+    )
 
 
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+    def save(self):
+        order = self.data
+        print(order)
+        send_order_email(order.get('email'), f"{order.get('email')}\n\n{order.get('name')} {order.get('last_name')}\n\n{order.get('phone_number')}\n\n{order.get('country')}\n\n{order.get('city')} {order.get('zip')}\n\n{order.get('street')} {order.get('home_number')}")
+        return super().save(commit=True)
 
 
 

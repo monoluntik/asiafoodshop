@@ -48,7 +48,7 @@ class ProductCreateView(IsAdminCheckMixin, CreateView):
     model = Product
     template_name = 'create.html'
     form_class = CreateProductForm
-    # success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,6 +101,9 @@ class About(TemplateView):
 
 
 
+
+
+
 @login_required()
 def cart_add(request, id):
     cart = Cart(request)
@@ -144,12 +147,8 @@ def cart_clear(request):
 def cart_detail(request):
     return render(request, 'cart_detail.html')
 
-
 class AddComment(CreateView):
     model = Comment
     form_class = CommentForm
     success_url = reverse_lazy('home')
-
-
-
 

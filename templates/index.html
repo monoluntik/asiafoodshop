@@ -30,13 +30,22 @@
 								{%endif%}
 								{%endfor%}
 							</section>
-							<p>Отфильтровать по цене</p>
-							<a href="{%url 'filter1'%}">50-100</a>
-							<br>
-							<a href="{%url 'filter2'%}">100-200</a>
-							<br>
-							<a href="{%url 'filter3'%}">200-1000</a>
+
+	
+							
+
 						</div>
 					</div>
-
+				
+					<div style="margin-left:100px;margin-right:100px;" >
+						<h6 class="dropdown-header">Отфильтровать по цене</h6>
+						<a href="{%url 'filter' 'qwerty'%}">50-100</a>
+						<br>
+						<a href="{%url 'filter' 'asdfgh'%}">100-200</a>
+						<br>
+						<a href="{%url 'filter' 'zxcvbn'%}">200-1000</a>
+						<br>
+						<a href="{%url 'filter' 'qazwsx'%}">1000-10000</a>
+						<br>
+					</div>
 {% endblock %}

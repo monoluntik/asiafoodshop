@@ -55,20 +55,32 @@
 							<li><a href="{% url 'logout' %}">Logout</a></li>
 							{%endif%}
 							{%if not request.user.is_superuser and request.user.is_authenticated%}
-							<li><a href="{%url 'cart_detail'%}">Cart</a></li>
+							<li><a href="{%url 'cart_detail'%}">LOLO</a></li>
 							
 							{%endif%}
 
 
 						</ul>
 					</nav>
+          <h1>Search results:</h1>
+          {% for product in context_object %}
+          {{product}}
+          <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img style="width: auto; height: auto;" src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <p class="card-title"><a href="{% url 'detail' product.id %}" class="navbar-brand">{{ product.name }}</a></p>
+                    <p class="card-text">{{ product.description|truncatechars:87 }}</p>
+                    <p class="card-text"><small class="text-muted">{{ product.status }}</small></p>
+                  </div>
+                </div>
+              </div>
+          </div>
+          {% endfor %}
 
-				{% block content %} {% endblock %}
-
-				
-
-				{%block trash%} 
-				{%endblock trash%}
 <!-- Footer -->
 					<footer id="footer">
 						<div class="inner">

@@ -103,46 +103,22 @@ class About(TemplateView):
 
 
 
-class Filter1View(ListView):
+class FilterView(ListView):
     model = Product
-    temlate_name = 'filter/filter1.html'
-    context_object_name = 'results1'
+    temlate_name = 'filter.html'
+    context_object_name = 'context_object'
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if queryset.filter(price__range=(50, 100)):
+        slug = self.kwargs.get('slug')
+        if slug == 'qwerty':
             queryset = queryset.filter(price__range=(50, 100))
-        else:
-            queryset = Product.objects.none()
-        print(queryset)
-        return queryset
-
-
-class Filter2View(ListView):
-    model = Product
-    temlate_name = 'filter/filter2.html'
-    context_object_name = 'results2'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        if queryset.filter(price__range=(100, 200)):
+        elif slug == 'asdfgh':
             queryset = queryset.filter(price__range=(100, 200))
-        else:
-            queryset = Product.objects.none()
-        print(queryset)
-        return queryset
-
-class Filter3View(ListView):
-    model = Product
-    temlate_name = 'filter/filter3.html'
-    context_object_name = 'results3'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        if queryset.filter(price__range=(200, 1000)):
+        elif slug == 'zxcvbn':
             queryset = queryset.filter(price__range=(200, 1000))
-        else:
-            queryset = Product.objects.none()
+        elif slug == 'qazwsx':
+            queryset = queryset.filter(price__range=(1000, 10000))
         print(queryset)
         return queryset
 

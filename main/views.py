@@ -19,7 +19,7 @@ class CategoryListView(ListView):
 
 class ProductListView(ListView):
     model = Product
-    template_name = 'product_list.html'
+    template_name = 'main/product_list.html'
     context_object_name = 'products'
     paginate_by = 2
 
@@ -36,6 +36,8 @@ class ProductDetailListView(DetailView):
     template_name = 'generic.html'
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
+
+
 
 
 
@@ -93,6 +95,7 @@ class SearchListView(ListView):
             queryset = Product.objects.none()
         else:
             queryset = queryset.filter(Q(name__icontains=q) | Q(description__icontains=q))
+        print(queryset)
         return queryset
 
 class About(TemplateView):
@@ -100,8 +103,48 @@ class About(TemplateView):
 
 
 
+class Filter1View(ListView):
+    model = Product
+    temlate_name = 'filter/filter1.html'
+    context_object_name = 'results1'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if queryset.filter(price__range=(50, 100)):
+            queryset = queryset.filter(price__range=(50, 100))
+        else:
+            queryset = Product.objects.none()
+        print(queryset)
+        return queryset
 
 
+class Filter2View(ListView):
+    model = Product
+    temlate_name = 'filter/filter2.html'
+    context_object_name = 'results2'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if queryset.filter(price__range=(100, 200)):
+            queryset = queryset.filter(price__range=(100, 200))
+        else:
+            queryset = Product.objects.none()
+        print(queryset)
+        return queryset
+
+class Filter3View(ListView):
+    model = Product
+    temlate_name = 'filter/filter3.html'
+    context_object_name = 'results3'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if queryset.filter(price__range=(200, 1000)):
+            queryset = queryset.filter(price__range=(200, 1000))
+        else:
+            queryset = Product.objects.none()
+        print(queryset)
+        return queryset
 
 
 @login_required()

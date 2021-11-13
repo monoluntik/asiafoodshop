@@ -7,6 +7,7 @@
 							<h1>{{product.name}}</h1>
 							<span class="image main"><img style="width: 20%; height: auto;" src="{{product.image.url}}" alt="" /></span>
 							<p>{{product.description}}</p>
+							<p>{{product.price}}</p>
 							{%if request.user.is_superuser%}
 							<a href="{%url 'update' product.id%}" class="btn btn-primary">Update</a>
 							<a href="{%url 'delete' product.id%}" class="btn btn-primary">Delete</a>

@@ -16,12 +16,14 @@ class RegisterView(CreateView):
     template_name = 'registration/register.html'
     success_url = reverse_lazy('home')
 
-class OrdersPageView(TemplateView):
-    template_name = 'pay.html'
+# class OrdersPageView(TemplateView):
+#     template_name = 'pay.html'
 
 
 class OrderInfo(CreateView):
     model = Order
     form_class = OrderForm
-    template_name = 'pay.html'
+    template_name = 'order.html'
     success_url = reverse_lazy('home')
+    
+  

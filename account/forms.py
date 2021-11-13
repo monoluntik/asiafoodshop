@@ -31,25 +31,13 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = '__all__'
-#     def clean(self):
-#         data = self.cleaned_data
-#         email = data.get('email')
-#         name = data.get('name')
-#         last_name = data.get('last_name')
-#         address = data.get('address')
-#         phone_number = data.get('phone_number')
-#         country = data.get('country')
-#         city = data.get('city')
-#         street = data.get('street')
-#         home_number = data.get('home_number')
-#         zip = data.get('zip')
-#         return data
 
+    def save(self):
+        order = self.data
+        print(order)
+        send_order_email(order.get('email'), f"{order.get('email')}\n\n{order.get('name')} {order.get('last_name')}\n\n{order.get('phone_number')}\n\n{order.get('country')}\n\n{order.get('city')} {order.get('zip')}\n\n{order.get('street')} {order.get('home_number')}")
+        return super().save(commit=True)
 
-    def save(self, commit=True):
-        user = User.objects.create_user(**self.cleaned_data)
-        send_order_email(user.email, f'{user.email}\n{user.name} {user.last_name}\n{user.address}\n{user.phone_number}\n{user.country}\n{user.city} {user.zip}\n{user.street} {user.home_number}')
-        return user
 
 
 class RegistrationForm(forms.ModelForm):    

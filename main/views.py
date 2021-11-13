@@ -104,6 +104,8 @@ class About(TemplateView):
 
 
 
+
+
 @login_required()
 def cart_add(request, id):
     cart = Cart(request)
@@ -146,3 +148,4 @@ def cart_clear(request):
 @login_required()
 def cart_detail(request):
     return render(request, 'cart_detail.html')
+

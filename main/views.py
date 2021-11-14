@@ -104,25 +104,71 @@ class About(TemplateView):
     template_name = 'about.html'
 
 
-
-class FilterView(ListView):
+class Filter1(DetailView):
     model = Product
-    temlate_name = 'filter.html'
-    context_object_name = 'context_object'
+    temlate_name = 'search.html'
+    context_object_name = 'results'
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        slug = self.kwargs.get('slug')
-        if slug == 'qwerty':
-            queryset = queryset.filter(price__range=(50, 100))
-        elif slug == 'asdfgh':
-            queryset = queryset.filter(price__range=(100, 200))
-        elif slug == 'zxcvbn':
-            queryset = queryset.filter(price__range=(200, 1000))
-        elif slug == 'qazwsx':
-            queryset = queryset.filter(price__range=(1000, 10000))
+        queryset = queryset.filter(price__range=(50, 100))
         print(queryset)
         return queryset
+
+class Filter2(DetailView):
+    model = Product
+    temlate_name = 'search.html'
+    context_object_name = 'results'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(price__range=(100, 200))
+        print(queryset)
+        return queryset
+
+
+class Filter3(DetailView):
+    model = Product
+    temlate_name = 'search.html'
+    context_object_name = 'results'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(price__range=(200, 1000))
+        print(queryset)
+        return queryset
+
+class Filter4(DetailView):
+    model = Product
+    temlate_name = 'search.html'
+    context_object_name = 'results'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(price__range=(1000, 10000))
+        print(queryset)
+        return queryset
+
+
+
+# class FilterView(ListView):
+#     model = Product
+#     temlate_name = 'filter.html'
+#     context_object_name = 'results'
+
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         slug = self.kwargs.get('slug')
+#         if slug == 'qwerty':
+#             queryset = queryset.filter(price__range=(50, 100))
+#         elif slug == 'asdfgh':
+#             queryset = queryset.filter(price__range=(100, 200))
+#         elif slug == 'zxcvbn':
+#             queryset = queryset.filter(price__range=(200, 1000))
+#         elif slug == 'qazwsx':
+#             queryset = queryset.filter(price__range=(1000, 10000))
+#         print(queryset)
+#         return queryset
 
 
 @login_required()

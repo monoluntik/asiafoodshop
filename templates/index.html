@@ -13,7 +13,7 @@
 
 								<article>
 									<h2>{{category.title}}</h2>
-									<span class="image">
+									<span>
 										<img style="width: 300px; height: 290px" src="{{category.image.url}}" alt="" />
 									</span>
 									<br>
@@ -37,15 +37,5 @@
 						</div>
 					</div>
 				
-					<div style="margin-left:100px;margin-right:100px;" >
-						<h6 class="dropdown-header">Отфильтровать по цене</h6>
-						<a href="{%url 'filter' 'qwerty'%}">50-100</a>
-						<br>
-						<a href="{%url 'filter' 'asdfgh'%}">100-200</a>
-						<br>
-						<a href="{%url 'filter' 'zxcvbn'%}">200-1000</a>
-						<br>
-						<a href="{%url 'filter' 'qazwsx'%}">1000-10000</a>
-						<br>
-					</div>
+
 {% endblock %}

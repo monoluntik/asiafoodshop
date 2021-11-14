@@ -1,7 +1,5 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.checks import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -15,6 +13,11 @@ class CategoryListView(ListView):
     model = Category
     template_name = 'index.html'
     context_object_name = 'categories'
+
+    def product_list(self, request):
+        filter = ProductFilter(request.GET, queryset=Product.objects.all())
+        return render(request, 'index.html', {'filter': filter})
+
 
 
 class ProductListView(ListView):
@@ -31,14 +34,23 @@ class ProductListView(ListView):
         return queryset
 
 
+
+
 class ProductDetailListView(DetailView):
     model = Product
     template_name = 'generic.html'
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
 
-
-
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    # fields = '__all__'
+    template_name = 'add_comment.html'
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['product_id']
+        return super().form_valid(form)
+    success_url = reverse_lazy('home')
 
 
 class IsAdminCheckMixin(UserPassesTestMixin):
@@ -102,60 +114,14 @@ class About(TemplateView):
     template_name = 'about.html'
 
 
-class Filter1(DetailView):
-    model = Product
-    temlate_name = 'search.html'
-    context_object_name = 'results'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(price__range=(50, 100))
-        print(queryset)
-        return queryset
-
-class Filter2(DetailView):
-    model = Product
-    temlate_name = 'search.html'
-    context_object_name = 'results'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(price__range=(100, 200))
-        print(queryset)
-        return queryset
-
-
-class Filter3(DetailView):
-    model = Product
-    temlate_name = 'search.html'
-    context_object_name = 'results'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(price__range=(200, 1000))
-        print(queryset)
-        return queryset
-
-class Filter4(DetailView):
-    model = Product
-    temlate_name = 'search.html'
-    context_object_name = 'results'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(price__range=(1000, 10000))
-        print(queryset)
-        return queryset
-
-
 
 # class FilterView(ListView):
 #     model = Product
 #     temlate_name = 'filter.html'
-#     context_object_name = 'results'
-
+#     context_object_name = 'context_object'
+#
 #     def get_queryset(self):
-#         queryset = super().get_queryset()
+#         queryset = Product.objects
 #         slug = self.kwargs.get('slug')
 #         if slug == 'qwerty':
 #             queryset = queryset.filter(price__range=(50, 100))
@@ -216,4 +182,3 @@ class AddComment(CreateView):
     model = Comment
     form_class = CommentForm
     success_url = reverse_lazy('home')
-

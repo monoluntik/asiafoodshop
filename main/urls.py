@@ -22,6 +22,7 @@ urlpatterns = [
 
 
 
+
     path('cart/add/<int:id>/', cart_add, name='cart_add'),
     path('cart/item_clear/<int:id>/', item_clear, name='item_clear'),
     path('cart/item_increment/<int:id>/',

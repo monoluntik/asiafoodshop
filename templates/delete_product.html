@@ -4,7 +4,7 @@
 <h1>Are you sure want to delete this product?</h1>
 <form method="post">
     {% csrf_token %}
-    <button style="margin-left:100px;margin-right:100px;" class="btn btn-danger" type="submit">Yes</button>
-    <a style="margin-left:100px;margin-right:100px;" href="{%url 'delete' product.id%}"><button class="btn btn-warning">No</button></a>
+    <button style="margin-left:100px;margin-right:100px;" class="btn btn-outline-danger" type="submit">Yes</button>
+    <a style="margin-left:100px;margin-right:100px;" href="{%url 'delete' product.id%}"><button class="btn btn-outline-dark" type="submit">No</button></a>
 </form>
 {%endblock%}

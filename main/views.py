@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.checks import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
+
+from .filter import ProductFilter
 from .models import *
 from .forms import *
 
@@ -21,6 +21,13 @@ class CategoryListView(ListView):
         return render(request, 'index.html', {'filter': filter})
 
 
+class ProductView(ListView):
+    model = Product
+    template_name = 'product.html'
+    context_object_name = 'products'
+    paginate_by = 8
+
+
 
 class ProductListView(ListView):
     model = Product
@@ -30,12 +37,10 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # print(self.kwargs)
+        print(self.kwargs)
         slug = self.kwargs.get('slug')
         queryset = queryset.filter(category__slug=slug)
         return queryset
-
-
 
 
 class ProductDetailListView(DetailView):
@@ -43,6 +48,7 @@ class ProductDetailListView(DetailView):
     template_name = 'generic.html'
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
+
 
 class AddCommentView(CreateView):
     model = Comment
@@ -115,26 +121,6 @@ class SearchListView(ListView):
 class About(TemplateView):
     template_name = 'about.html'
 
-
-
-# class FilterView(ListView):
-#     model = Product
-#     temlate_name = 'filter.html'
-#     context_object_name = 'context_object'
-#
-#     def get_queryset(self):
-#         queryset = Product.objects
-#         slug = self.kwargs.get('slug')
-#         if slug == 'qwerty':
-#             queryset = queryset.filter(price__range=(50, 100))
-#         elif slug == 'asdfgh':
-#             queryset = queryset.filter(price__range=(100, 200))
-#         elif slug == 'zxcvbn':
-#             queryset = queryset.filter(price__range=(200, 1000))
-#         elif slug == 'qazwsx':
-#             queryset = queryset.filter(price__range=(1000, 10000))
-#         print(queryset)
-#         return queryset
 
 
 @login_required()

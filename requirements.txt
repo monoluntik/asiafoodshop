@@ -4,3 +4,4 @@ pillow==7.1
 python-decouple
 stripe
 django-shopping-cart
+django-filter

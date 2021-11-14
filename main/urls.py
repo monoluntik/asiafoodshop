@@ -8,16 +8,14 @@ urlpatterns = [
     path('', CategoryListView.as_view(), name='home'),
     path('<str:slug>/', ProductListView.as_view(), name='list'),
     path('product/<int:product_id>/', ProductDetailListView.as_view(), name='detail'),
+    path('product/<int:product_id>/', ProductDetailListView.as_view(), name='detail'),
+    path('product/<int:product_id>/comment/', AddCommentView.as_view(), name='add_comment'),
     path('product/create/', ProductCreateView.as_view(), name='create'),
     path('product/update/<int:product_id>/', ProductUpdateView.as_view(), name='update'),
     path('product/delete/<int:product_id>/', ProductDeleteView.as_view(), name='delete'),
     path('search', SearchListView.as_view(), name='search'),
     path('about', About.as_view(), name='about'),
-    path('just1/', Filter1.as_view(), name='just1'),
-    path('just2/', Filter2.as_view(), name='just2'),
-    path('just3/', Filter3.as_view(), name='just3'),
-    path('just4/', Filter4.as_view(), name='just4'),
-    
+    # path('filter/<str:slug>/', FilterView.as_view(), name='filter'),
 
 
 

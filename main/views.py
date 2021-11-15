@@ -19,6 +19,12 @@ class CategoryListView(ListView):
         return render(request, 'index.html', {'filter': filter})
 
 
+class ProductView(ListView):
+    model = Product
+    template_name = 'main/product_list.html'
+    context_object_name = 'products'
+    paginate_by = 8    
+
 
 class ProductListView(ListView):
     model = Product

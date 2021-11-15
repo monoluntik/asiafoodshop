@@ -1,1 +1,25 @@
-<a>Hello</a>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>UMAMI TEAM</h1>
+<section class="tiles">
+  <div style="margin-left:100px;margin-right:100px;">
+<div class="card" style="width: 18rem;"  >
+  <img src="{%static 'images/monoluntik.jpg'%}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Элдияр</h5>
+      <a href="https://www.instagram.com/monoluntik/" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
+  </div>
+</div>
+    </div>
+  <div  style="margin-left:100px;margin-right:100px;">
+<div class="card" style="width: 18rem;" >
+  <img src="{%static 'images/ilgiz.jpg'%}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Ильгиз</h5>
+    <a href="https://www.instagram.com/iam_dandelion/" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
+  </div>
+</div>
+    </div>
+</section>
+{% endblock %}
